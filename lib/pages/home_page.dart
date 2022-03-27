@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whatsapp_status_saver/controllers/home_controller.dart';
+import 'package:whatsapp_status_saver/widgets/status.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -15,15 +16,29 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
-      assignId: true,
       builder: (_) {
         return Scaffold(
           appBar: AppBar(
-            title: Text("Status"),
+            title: const Text("Status"),
             elevation: 0,
           ),
-          body: Center(),
+          body: IndexedStack(
+            index: homeController.currentPage,
+            children: const [
+              Status(),
+              Center(
+                child: Text("Saved"),
+              ),
+              Center(
+                child: Text("Settings"),
+              ),
+            ],
+          ),
           bottomNavigationBar: BottomNavigationBar(
+            currentIndex: homeController.currentPage,
+            onTap: (index) {
+              homeController.onPageChange(index);
+            },
             items: const [
               BottomNavigationBarItem(
                   icon: Icon(
