@@ -38,21 +38,29 @@ class _StatusTileState extends State<StatusTile> {
                   videoPlayerController.value.isInitialized
               ? VideoPlayer(videoPlayerController)
               : Container(),
-          Align(
-            child: InfoIconButton(
-              icon: videoPlayerController.value.isPlaying
-                  ? Icons.pause_outlined
-                  : Icons.play_arrow,
-              onPressed: () {
-                videoPlayerController.value.isPlaying
-                    ? videoPlayerController.pause()
-                    : videoPlayerController.play();
+          widget.statusType == "video"
+              ? Align(
+                  child: InfoIconButton(
+                    icon: videoPlayerController.value.isPlaying
+                        ? Icons.pause_outlined
+                        : Icons.play_arrow,
+                    onPressed: () {
+                      videoPlayerController.value.isPlaying
+                          ? videoPlayerController.pause()
+                          : videoPlayerController.play();
 
-                setState(() {});
-              },
-            ),
-            alignment: Alignment.center,
-          ),
+                      setState(() {});
+                    },
+                  ),
+                  alignment: Alignment.center,
+                )
+              : Align(
+                  child: InfoIconButton(
+                    icon: Icons.visibility_outlined,
+                    onPressed: () {},
+                  ),
+                  alignment: Alignment.center,
+                ),
           Padding(
             padding: const EdgeInsets.only(bottom: 8.0, right: 8),
             child: Align(
