@@ -10,4 +10,14 @@ class VideoService {
 
     return false;
   }
+
+  static bool isImage(String path) {
+    String type = lookupMimeType(path)!;
+
+    if (type.startsWith("image/")) {
+      return true;
+    }
+
+    return false;
+  }
 }

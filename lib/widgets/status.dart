@@ -30,7 +30,8 @@ class _StatusState extends State<Status> {
                     crossAxisCellCount: 1,
                     mainAxisCellCount: homeController.getRandomVideoSize(),
                     child: StatusTile(
-                      statusPath: status.path,
+                      statusPath: status["file"].path,
+                      statusType: status["type"],
                     )),
               )
               .toList(),
