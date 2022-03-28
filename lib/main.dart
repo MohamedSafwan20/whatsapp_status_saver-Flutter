@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get.dart';
 import 'package:whatsapp_status_saver/config/colors.dart';
+import 'package:whatsapp_status_saver/config/routes.dart';
 import 'package:whatsapp_status_saver/pages/home_page.dart';
+import 'package:whatsapp_status_saver/pages/image_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +22,11 @@ class MyApp extends StatelessWidget {
         secondary: color["secondary"],
       )),
       debugShowCheckedModeBanner: false,
-      home: const HomePage(),
+      initialRoute: route["HOME"],
+      getPages: [
+        GetPage(name: route["HOME"], page: () => const HomePage()),
+        GetPage(name: route["IMAGE_VIEW"], page: () => const ImagePage()),
+      ],
     );
   }
 }

@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
+import 'package:whatsapp_status_saver/config/routes.dart';
 import 'package:whatsapp_status_saver/widgets/info_icon_button.dart';
 
 class StatusTile extends StatefulWidget {
@@ -57,7 +59,10 @@ class _StatusTileState extends State<StatusTile> {
               : Align(
                   child: InfoIconButton(
                     icon: Icons.visibility_outlined,
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(route["IMAGE_VIEW"],
+                          arguments: {"image": widget.statusPath});
+                    },
                   ),
                   alignment: Alignment.center,
                 ),
