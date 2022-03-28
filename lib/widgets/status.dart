@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:whatsapp_status_saver/controllers/home_controller.dart';
+import 'package:whatsapp_status_saver/widgets/status_tile.dart';
 
 class Status extends StatefulWidget {
   const Status({Key? key}) : super(key: key);
@@ -16,50 +17,35 @@ class _StatusState extends State<Status> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: StaggeredGrid.count(
-        crossAxisCount: 2,
-        mainAxisSpacing: 4,
-        crossAxisSpacing: 4,
-        children: [
-          StaggeredGridTile.count(
-            crossAxisCellCount: 1,
-            mainAxisCellCount: homeController.getRandomVideoSize(),
-            child: GestureDetector(
-              onTap: homeController.getRandomVideoSize,
-              child: Container(
-                color: Colors.red,
-              ),
-            ),
-          ),
-          StaggeredGridTile.count(
-            crossAxisCellCount: 1,
-            mainAxisCellCount: homeController.getRandomVideoSize(),
-            child: Container(
-              color: Colors.blue,
-            ),
-          ),
-          StaggeredGridTile.count(
-            crossAxisCellCount: 1,
-            mainAxisCellCount: homeController.getRandomVideoSize(),
-            child: Container(
-              color: Colors.black,
-            ),
-          ),
-          StaggeredGridTile.count(
-            crossAxisCellCount: 1,
-            mainAxisCellCount: homeController.getRandomVideoSize(),
-            child: Container(
-              color: Colors.orange,
-            ),
-          ),
-          StaggeredGridTile.count(
-            crossAxisCellCount: 1,
-            mainAxisCellCount: homeController.getRandomVideoSize(),
-            child: Container(
-              color: Colors.red,
-            ),
-          ),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: StaggeredGrid.count(
+          crossAxisCount: 2,
+          mainAxisSpacing: 6,
+          crossAxisSpacing: 6,
+          children: [
+            StaggeredGridTile.count(
+                crossAxisCellCount: 1,
+                mainAxisCellCount: homeController.getRandomVideoSize(),
+                child: const StatusTile()),
+            StaggeredGridTile.count(
+                crossAxisCellCount: 1,
+                mainAxisCellCount: homeController.getRandomVideoSize(),
+                child: const StatusTile()),
+            StaggeredGridTile.count(
+                crossAxisCellCount: 1,
+                mainAxisCellCount: homeController.getRandomVideoSize(),
+                child: const StatusTile()),
+            StaggeredGridTile.count(
+                crossAxisCellCount: 1,
+                mainAxisCellCount: homeController.getRandomVideoSize(),
+                child: const StatusTile()),
+            StaggeredGridTile.count(
+                crossAxisCellCount: 1,
+                mainAxisCellCount: homeController.getRandomVideoSize(),
+                child: const StatusTile()),
+          ],
+        ),
       ),
     );
   }

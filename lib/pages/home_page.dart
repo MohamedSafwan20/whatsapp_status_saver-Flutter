@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
       builder: (_) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text("Status"),
+            title: const Text("Status Saver"),
             elevation: 0,
           ),
           body: IndexedStack(
