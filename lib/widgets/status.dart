@@ -23,28 +23,17 @@ class _StatusState extends State<Status> {
           crossAxisCount: 2,
           mainAxisSpacing: 6,
           crossAxisSpacing: 6,
-          children: [
-            StaggeredGridTile.count(
-                crossAxisCellCount: 1,
-                mainAxisCellCount: homeController.getRandomVideoSize(),
-                child: const StatusTile()),
-            StaggeredGridTile.count(
-                crossAxisCellCount: 1,
-                mainAxisCellCount: homeController.getRandomVideoSize(),
-                child: const StatusTile()),
-            StaggeredGridTile.count(
-                crossAxisCellCount: 1,
-                mainAxisCellCount: homeController.getRandomVideoSize(),
-                child: const StatusTile()),
-            StaggeredGridTile.count(
-                crossAxisCellCount: 1,
-                mainAxisCellCount: homeController.getRandomVideoSize(),
-                child: const StatusTile()),
-            StaggeredGridTile.count(
-                crossAxisCellCount: 1,
-                mainAxisCellCount: homeController.getRandomVideoSize(),
-                child: const StatusTile()),
-          ],
+          children: homeController
+              .getAllStatus()
+              .map(
+                (status) => StaggeredGridTile.count(
+                    crossAxisCellCount: 1,
+                    mainAxisCellCount: homeController.getRandomVideoSize(),
+                    child: StatusTile(
+                      statusPath: status.path,
+                    )),
+              )
+              .toList(),
         ),
       ),
     );

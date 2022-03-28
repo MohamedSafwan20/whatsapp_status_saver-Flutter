@@ -14,6 +14,13 @@ class _HomePageState extends State<HomePage> {
   final homeController = Get.put(HomeController());
 
   @override
+  void initState() {
+    super.initState();
+
+    homeController.requestPermission();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(
       builder: (_) {
