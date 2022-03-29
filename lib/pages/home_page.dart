@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:whatsapp_status_saver/controllers/home_controller.dart';
+import 'package:whatsapp_status_saver/widgets/saved.dart';
 import 'package:whatsapp_status_saver/widgets/status.dart';
 
 class HomePage extends StatefulWidget {
@@ -33,9 +34,7 @@ class _HomePageState extends State<HomePage> {
             index: homeController.currentPage,
             children: const [
               Status(),
-              Center(
-                child: Text("Saved"),
-              ),
+              Saved(),
               Center(
                 child: Text("Settings"),
               ),
