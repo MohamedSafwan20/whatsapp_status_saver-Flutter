@@ -19,22 +19,26 @@ class _SavedState extends State<Saved> {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: StaggeredGrid.count(
-          crossAxisCount: 2,
-          mainAxisSpacing: 6,
-          crossAxisSpacing: 6,
-          children: homeController
-              .getAllStatus()
-              .map(
-                (status) => StaggeredGridTile.count(
-                    crossAxisCellCount: 1,
-                    mainAxisCellCount: homeController.getRandomVideoSize(),
-                    child: SavedTile(
-                      statusPath: status["file"].path,
-                      statusType: status["type"],
-                    )),
-              )
-              .toList(),
+        child: GetBuilder<HomeController>(
+          builder: (_) {
+            return StaggeredGrid.count(
+              crossAxisCount: 2,
+              mainAxisSpacing: 6,
+              crossAxisSpacing: 6,
+              children: homeController
+                  .getAllSavedStatus()
+                  .map(
+                    (status) => StaggeredGridTile.count(
+                        crossAxisCellCount: 1,
+                        mainAxisCellCount: homeController.getRandomVideoSize(),
+                        child: SavedTile(
+                          statusPath: status["file"].path,
+                          statusType: status["type"],
+                        )),
+                  )
+                  .toList(),
+            );
+          },
         ),
       ),
     );

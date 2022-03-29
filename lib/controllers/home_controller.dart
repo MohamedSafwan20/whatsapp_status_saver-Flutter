@@ -39,6 +39,22 @@ class HomeController extends GetxController {
         .toList();
   }
 
+  List<Map> getAllSavedStatus() {
+    Directory directory = Directory(constant["APP_DIRECTORY_PATH"]);
+    List<FileSystemEntity> statuses =
+        directory.listSync(recursive: false).toList();
+
+    statuses.removeWhere((file) =>
+        !FileService.isVideo(file.path) && !FileService.isImage(file.path));
+
+    return statuses
+        .map((file) => {
+              "file": file,
+              "type": FileService.isVideo(file.path) ? "video" : "image"
+            })
+        .toList();
+  }
+
   void requestPermission() async {
     PermissionStatus status = await Permission.storage.request();
     if (status.isDenied | status.isPermanentlyDenied) {}
@@ -64,6 +80,7 @@ class HomeController extends GetxController {
     if (file == null) {
       print("error");
     } else {
+      update();
       print("success");
     }
   }
