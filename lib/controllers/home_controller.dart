@@ -6,6 +6,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:video_player/video_player.dart';
 import 'package:whatsapp_status_saver/config/constants.dart';
 import 'package:whatsapp_status_saver/services/file_service.dart';
+import 'package:whatsapp_status_saver/utils/utils.dart';
 
 class HomeController extends GetxController {
   int currentPage = 0;
@@ -46,5 +47,23 @@ class HomeController extends GetxController {
 
   void initializeVideoPlayer(String video) async {
     return await VideoPlayerController.file(File(video)).initialize();
+  }
+
+  void createAppFolder() async {
+    final path = Directory("storage/emulated/0/${constant['APP_FOLDER_NAME']}");
+
+    if (!(await path.exists())) {
+      path.create();
+    }
+  }
+
+  Future<File> copyFile({required File sourceFile, required String to}) async {
+    try {
+      return await sourceFile
+          .rename("$to/${Utils.getFilenameFromFile(sourceFile)}");
+    } catch (_) {
+      final newFile = await sourceFile.copy(to);
+      return newFile;
+    }
   }
 }

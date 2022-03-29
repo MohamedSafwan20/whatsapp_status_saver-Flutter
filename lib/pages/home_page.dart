@@ -19,6 +19,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
 
     homeController.requestPermission();
+    homeController.createAppFolder();
   }
 
   @override
