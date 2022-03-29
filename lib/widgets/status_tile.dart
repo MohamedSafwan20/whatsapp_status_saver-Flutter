@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
+import 'package:whatsapp_status_saver/config/colors.dart';
 import 'package:whatsapp_status_saver/config/routes.dart';
 import 'package:whatsapp_status_saver/widgets/info_icon_button.dart';
 
@@ -38,7 +39,9 @@ class _StatusTileState extends State<StatusTile> {
         children: [
           widget.statusType == "video" &&
                   videoPlayerController.value.isInitialized
-              ? VideoPlayer(videoPlayerController)
+              ? ClipRRect(
+                  borderRadius: BorderRadius.circular(6),
+                  child: VideoPlayer(videoPlayerController))
               : Container(),
           widget.statusType == "video"
               ? Align(
@@ -78,11 +81,13 @@ class _StatusTileState extends State<StatusTile> {
           )
         ],
       ),
-      decoration: widget.statusType == "image"
-          ? BoxDecoration(
-              image: DecorationImage(
-                  image: FileImage(File(widget.statusPath)), fit: BoxFit.fill))
-          : null,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: color["disabled"], width: 2),
+          image: widget.statusType == "image"
+              ? DecorationImage(
+                  image: FileImage(File(widget.statusPath)), fit: BoxFit.fill)
+              : null),
     );
   }
 }

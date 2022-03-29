@@ -1,23 +1,23 @@
 import 'package:mime/mime.dart';
 
-class VideoService {
+class FileService {
   static bool isVideo(String path) {
-    String type = lookupMimeType(path)!;
+    String? type = lookupMimeType(path);
 
-    if (type.startsWith("video/")) {
-      return true;
+    if (type == null || !type.startsWith("video/")) {
+      return false;
     }
 
-    return false;
+    return true;
   }
 
   static bool isImage(String path) {
-    String type = lookupMimeType(path)!;
+    String? type = lookupMimeType(path);
 
-    if (type.startsWith("image/")) {
-      return true;
+    if (type == null || !type.startsWith("image/")) {
+      return false;
     }
 
-    return false;
+    return true;
   }
 }

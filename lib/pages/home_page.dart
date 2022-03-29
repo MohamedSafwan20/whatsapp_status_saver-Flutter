@@ -50,19 +50,19 @@ class _HomePageState extends State<HomePage> {
               BottomNavigationBarItem(
                   icon: Icon(
                     Icons.collections_outlined,
-                    size: 30,
+                    size: 25,
                   ),
                   label: "Status"),
               BottomNavigationBarItem(
                   icon: Icon(
                     Icons.downloading_outlined,
-                    size: 30,
+                    size: 25,
                   ),
                   label: "Saved"),
               BottomNavigationBarItem(
                   icon: Icon(
                     Icons.settings_outlined,
-                    size: 30,
+                    size: 25,
                   ),
                   label: "Settings"),
             ],

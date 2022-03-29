@@ -29,12 +29,12 @@ class HomeController extends GetxController {
         directory.listSync(recursive: false).toList();
 
     statuses.removeWhere((file) =>
-        !VideoService.isVideo(file.path) && !VideoService.isImage(file.path));
+        !FileService.isVideo(file.path) && !FileService.isImage(file.path));
 
     return statuses
         .map((file) => {
               "file": file,
-              "type": VideoService.isVideo(file.path) ? "video" : "image"
+              "type": FileService.isVideo(file.path) ? "video" : "image"
             })
         .toList();
   }

@@ -19,7 +19,6 @@ class MyApp extends StatelessWidget {
           colorScheme:
               ColorScheme.fromSwatch(primarySwatch: Colors.green).copyWith(
         primary: color["primary"],
-        secondary: color["secondary"],
       )),
       debugShowCheckedModeBanner: false,
       initialRoute: route["HOME"],
