@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 import 'package:whatsapp_status_saver/config/colors.dart';
+import 'package:whatsapp_status_saver/controllers/home_controller.dart';
 import 'package:whatsapp_status_saver/services/intent_service.dart';
 import 'package:whatsapp_status_saver/widgets/info_icon_button.dart';
 
@@ -20,6 +22,8 @@ class SavedTile extends StatefulWidget {
 
 class _SavedTileState extends State<SavedTile> {
   late VideoPlayerController videoPlayerController;
+
+  final homeController = Get.find<HomeController>();
 
   @override
   void initState() {
@@ -54,7 +58,9 @@ class _SavedTileState extends State<SavedTile> {
             child: Align(
               child: InfoIconButton(
                 icon: Icons.delete_outlined,
-                onPressed: () {},
+                onPressed: () {
+                  homeController.deleteStatus(statusPath: widget.statusPath);
+                },
               ),
               alignment: Alignment.bottomRight,
             ),

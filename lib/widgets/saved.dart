@@ -20,6 +20,7 @@ class _SavedState extends State<Saved> {
       child: Padding(
         padding: const EdgeInsets.all(10.0),
         child: GetBuilder<HomeController>(
+          id: "saved",
           builder: (_) {
             return StaggeredGrid.count(
               crossAxisCount: 2,
@@ -35,7 +36,7 @@ class _SavedState extends State<Saved> {
                           statusPath: status["file"].path,
                           statusType: status["type"],
                         )),
-                  )
+              )
                   .toList(),
             );
           },

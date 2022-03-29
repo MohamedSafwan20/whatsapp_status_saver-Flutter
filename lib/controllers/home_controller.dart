@@ -80,8 +80,19 @@ class HomeController extends GetxController {
     if (file == null) {
       print("error");
     } else {
-      update();
+      update(["saved"]);
       print("success");
+    }
+  }
+
+  void deleteStatus({required String statusPath}) {
+    var res = FileService.deleteFile(file: File(statusPath));
+
+    if (res) {
+      update(["saved"]);
+      print("success");
+    } else {
+      print("error");
     }
   }
 }

@@ -32,4 +32,14 @@ class FileService {
       return null;
     }
   }
+
+  static bool deleteFile({required File file}) {
+    try {
+      file.deleteSync();
+
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
 }
