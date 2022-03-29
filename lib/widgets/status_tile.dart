@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 import 'package:whatsapp_status_saver/config/colors.dart';
-import 'package:whatsapp_status_saver/config/constants.dart';
 import 'package:whatsapp_status_saver/config/routes.dart';
 import 'package:whatsapp_status_saver/controllers/home_controller.dart';
 import 'package:whatsapp_status_saver/widgets/info_icon_button.dart';
@@ -78,16 +77,8 @@ class _StatusTileState extends State<StatusTile> {
             child: Align(
               child: InfoIconButton(
                 icon: Icons.file_download_outlined,
-                onPressed: () async {
-                  File file = await homeController.copyFile(
-                      sourceFile: File(widget.statusPath),
-                      to: "storage/emulated/0/${constant['APP_FOLDER_NAME']}");
-
-                  if (file.existsSync()) {
-                    print("suceess");
-                  } else {
-                    print("error");
-                  }
+                onPressed: () {
+                  homeController.saveStatus(statusPath: widget.statusPath);
                 },
               ),
               alignment: Alignment.bottomRight,

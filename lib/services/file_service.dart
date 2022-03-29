@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:mime/mime.dart';
+import 'package:whatsapp_status_saver/utils/utils.dart';
 
 class FileService {
   static bool isVideo(String path) {
@@ -19,5 +22,14 @@ class FileService {
     }
 
     return true;
+  }
+
+  static Future copyFile({required File sourceFile, required String to}) async {
+    try {
+      return await sourceFile
+          .copy("$to/${Utils.getFilenameFromFile(sourceFile)}");
+    } catch (_) {
+      return null;
+    }
   }
 }
