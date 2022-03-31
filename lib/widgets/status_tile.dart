@@ -74,14 +74,41 @@ class _StatusTileState extends State<StatusTile> {
                 ),
           Padding(
             padding: const EdgeInsets.only(bottom: 8.0, right: 8),
-            child: Align(
-              child: InfoIconButton(
-                icon: Icons.file_download_outlined,
-                onPressed: () {
-                  homeController.saveStatus(statusPath: widget.statusPath);
-                },
-              ),
-              alignment: Alignment.bottomRight,
+            child: GetBuilder<HomeController>(
+              id: widget.statusPath,
+              builder: (_) {
+                if (homeController.isDownloading.value) {
+                  return Align(
+                      alignment: Alignment.bottomRight,
+                      child: SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(
+                            color: color["disabled"],
+                            strokeWidth: 3,
+                          )));
+                }
+
+                return Align(
+                  child: homeController.getSavedStatus(
+                              statusPath: widget.statusPath) ==
+                          null
+                      ? InfoIconButton(
+                          icon: Icons.file_download_outlined,
+                          onPressed: () {
+                            homeController.saveStatus(
+                                statusPath: widget.statusPath);
+                          },
+                        )
+                      : InfoIconButton(
+                          icon: Icons.done_outlined,
+                          onPressed: () {
+                            null;
+                          },
+                        ),
+                  alignment: Alignment.bottomRight,
+                );
+              },
             ),
           )
         ],

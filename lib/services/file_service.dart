@@ -24,12 +24,13 @@ class FileService {
     return true;
   }
 
-  static Future copyFile({required File sourceFile, required String to}) async {
+  static bool copyFile({required File sourceFile, required String to}) {
     try {
-      return await sourceFile
-          .copy("$to/${Utils.getFilenameFromFile(sourceFile)}");
+      sourceFile.copySync("$to/${Utils.getFilenameFromFile(sourceFile)}");
+
+      return true;
     } catch (_) {
-      return null;
+      return false;
     }
   }
 
