@@ -14,9 +14,11 @@ class HomeController extends GetxController {
   List<double> videoSizes = [0.9, 1.1, 2];
 
   RxList allStatus = [].obs;
+  RxList allSavedStatus = [].obs;
 
   RxBool isDownloading = false.obs;
   RxBool isAllStatusLoading = false.obs;
+  RxBool isAllSavedStatusLoading = false.obs;
 
   void onPageChange(int page) {
     currentPage = page;
@@ -49,7 +51,9 @@ class HomeController extends GetxController {
     isAllStatusLoading.value = false;
   }
 
-  List<Map> getAllSavedStatus() {
+  void getAllSavedStatus() {
+    isAllSavedStatusLoading.value = true;
+
     Directory directory = Directory(constant["APP_DIRECTORY_PATH"]);
     List<FileSystemEntity> statuses =
         directory.listSync(recursive: false).toList();
@@ -57,12 +61,14 @@ class HomeController extends GetxController {
     statuses.removeWhere((file) =>
         !FileService.isVideo(file.path) && !FileService.isImage(file.path));
 
-    return statuses
+    allSavedStatus.value = statuses
         .map((file) => {
               "file": file,
               "type": FileService.isVideo(file.path) ? "video" : "image"
             })
         .toList();
+
+    isAllSavedStatusLoading.value = false;
   }
 
   dynamic getSavedStatus({required String statusPath}) {
@@ -112,7 +118,7 @@ class HomeController extends GetxController {
         to: "storage/emulated/0/${constant['APP_FOLDER_NAME']}");
 
     if (file) {
-      update(["saved"]);
+      getAllSavedStatus();
       print("success");
     } else {
       print("error");
@@ -126,7 +132,8 @@ class HomeController extends GetxController {
     var res = FileService.deleteFile(file: File(statusPath));
 
     if (res) {
-      update(["saved", statusPath]);
+      getAllSavedStatus();
+      update([statusPath]);
       print("success");
     } else {
       print("error");
