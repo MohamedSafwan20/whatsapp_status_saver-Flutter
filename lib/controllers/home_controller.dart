@@ -13,7 +13,10 @@ class HomeController extends GetxController {
 
   List<double> videoSizes = [0.9, 1.1, 2];
 
+  RxList allStatus = [].obs;
+
   RxBool isDownloading = false.obs;
+  RxBool isAllStatusLoading = false.obs;
 
   void onPageChange(int page) {
     currentPage = page;
@@ -26,7 +29,9 @@ class HomeController extends GetxController {
     return videoSizes[random.nextInt(videoSizes.length)];
   }
 
-  List<Map> getAllStatus() {
+  void getAllStatus() {
+    isAllStatusLoading.value = true;
+
     Directory directory = Directory(constant["WHATSAPP_STATUS_DIRECTORY_PATH"]);
     List<FileSystemEntity> statuses =
         directory.listSync(recursive: false).toList();
@@ -34,12 +39,14 @@ class HomeController extends GetxController {
     statuses.removeWhere((file) =>
         !FileService.isVideo(file.path) && !FileService.isImage(file.path));
 
-    return statuses
+    allStatus.value = statuses
         .map((file) => {
               "file": file,
               "type": FileService.isVideo(file.path) ? "video" : "image"
             })
         .toList();
+
+    isAllStatusLoading.value = false;
   }
 
   List<Map> getAllSavedStatus() {
