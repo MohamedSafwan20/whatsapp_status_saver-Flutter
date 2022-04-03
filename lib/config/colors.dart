@@ -6,4 +6,5 @@ const Map color = {
   "primaryVariant": Color(0xFF218e3d),
   "disabled": Color(0xFFe2e6e8),
   "disabledDark": Color(0xffdadada),
+  "error": Color(0xffe30c0c),
 };

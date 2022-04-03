@@ -13,15 +13,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final homeController = Get.put(HomeController());
-
-  @override
-  void initState() {
-    super.initState();
-
-    homeController.requestPermission();
-    homeController.createAppFolder();
-  }
+  final homeController = Get.find<HomeController>();
 
   @override
   Widget build(BuildContext context) {

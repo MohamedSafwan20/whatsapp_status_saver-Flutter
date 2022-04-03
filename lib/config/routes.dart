@@ -1,1 +1,1 @@
-const Map route = {"HOME": "/", "IMAGE_VIEW": "/image"};
+const Map route = {"HOME": "/", "IMAGE_VIEW": "/image", "INIT": "/initial"};

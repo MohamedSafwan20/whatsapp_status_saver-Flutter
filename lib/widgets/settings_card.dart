@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:whatsapp_status_saver/config/colors.dart';
 
 class SettingsCard extends StatefulWidget {
-  const SettingsCard({Key? key}) : super(key: key);
+  const SettingsCard({Key? key, required this.onPressed}) : super(key: key);
+
+  final Function() onPressed;
 
   @override
   State<SettingsCard> createState() => _SettingsCardState();
@@ -41,7 +43,7 @@ class _SettingsCardState extends State<SettingsCard> {
             height: 40,
             width: 40,
             child: IconButton(
-              onPressed: () {},
+              onPressed: widget.onPressed,
               icon: const Icon(
                 Icons.navigate_next,
                 color: Colors.black,

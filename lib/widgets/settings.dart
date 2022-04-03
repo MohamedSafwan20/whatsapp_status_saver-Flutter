@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:whatsapp_status_saver/controllers/home_controller.dart';
 import 'package:whatsapp_status_saver/widgets/settings_card.dart';
 
 class Settings extends StatelessWidget {
@@ -6,11 +8,13 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final homeController = Get.find<HomeController>();
+
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Padding(
+        children: [
+          const Padding(
             padding: EdgeInsets.all(40),
             child: Text(
               "Settings",
@@ -18,8 +22,13 @@ class Settings extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-            child: SettingsCard(),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+            child: SettingsCard(
+              onPressed: () {
+                homeController.changeDownloadLocation(
+                    context: context, currentLocation: "/storage/emulated/0");
+              },
+            ),
           )
         ],
       ),
